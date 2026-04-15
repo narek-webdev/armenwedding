@@ -338,6 +338,203 @@ a {
     50% { transform: translateY(6px); }
 }
 
+/* --- Invitation & Calendar Section --- */
+.invitation-section {
+    background: var(--color-cream);
+    padding: 5rem 0;
+}
+
+.invitation-card {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 3.5rem 2.5rem;
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.04);
+}
+
+.invitation-heading {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 300;
+    color: var(--color-text);
+    letter-spacing: 0.03em;
+    margin-bottom: 2rem;
+}
+
+.invitation-text-block {
+    margin-bottom: 2.5rem;
+}
+
+.invitation-text-block p {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    font-weight: 300;
+    line-height: 1.9;
+    color: var(--color-text-light);
+    letter-spacing: 0.02em;
+    margin-bottom: 0.75rem;
+}
+
+.invitation-text-block p:last-child {
+    margin-bottom: 0;
+}
+
+.calendar-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+}
+
+.calendar-divider span:nth-child(1),
+.calendar-divider span:nth-child(3) {
+    width: 60px;
+    height: 1px;
+    background: var(--color-border);
+}
+
+.calendar-divider span:nth-child(2) {
+    width: 6px;
+    height: 6px;
+    background: var(--color-accent-light);
+    border-radius: 50%;
+}
+
+.calendar-widget {
+    margin-bottom: 2.5rem;
+}
+
+.calendar-month-name {
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    font-weight: 300;
+    color: var(--color-text);
+    letter-spacing: 0.05em;
+    margin-bottom: 1.5rem;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    max-width: 380px;
+    margin: 0 auto;
+}
+
+.cal-head {
+    font-family: var(--font-serif);
+    font-size: 0.7rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    padding: 0.5rem 0;
+}
+
+.cal-head.cal-weekend {
+    color: var(--color-accent);
+}
+
+.cal-day {
+    font-family: var(--font-serif);
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: var(--color-text-light);
+    padding: 0.6rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s ease;
+}
+
+.cal-day.cal-weekend {
+    color: var(--color-accent);
+}
+
+.cal-day.cal-highlight {
+    position: relative;
+    color: var(--color-text);
+    font-weight: 500;
+    font-size: 1.05rem;
+}
+
+.cal-day.cal-highlight::before {
+    content: '';
+    position: absolute;
+    width: 38px;
+    height: 38px;
+    border: 1.5px solid var(--color-accent);
+    border-radius: 50%;
+    animation: calPulse 3s ease-in-out infinite;
+}
+
+@keyframes calPulse {
+    0%, 100% { transform: scale(1); opacity: 0.6; }
+    50% { transform: scale(1.1); opacity: 1; }
+}
+
+.invitation-closing {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--color-accent);
+    letter-spacing: 0.02em;
+    line-height: 1.7;
+}
+
+@media (max-width: 768px) {
+    .invitation-card {
+        padding: 2.5rem 1.5rem;
+    }
+
+    .calendar-grid {
+        max-width: 320px;
+    }
+
+    .cal-day.cal-highlight::before {
+        width: 34px;
+        height: 34px;
+    }
+}
+
+@media (max-width: 480px) {
+    .invitation-section {
+        padding: 4rem 0;
+    }
+
+    .invitation-card {
+        padding: 2rem 1.25rem;
+    }
+
+    .invitation-text-block p {
+        font-size: 0.95rem;
+    }
+
+    .calendar-grid {
+        max-width: 280px;
+        gap: 2px;
+    }
+
+    .cal-day {
+        font-size: 0.85rem;
+        padding: 0.5rem 0;
+    }
+
+    .cal-day.cal-highlight::before {
+        width: 30px;
+        height: 30px;
+    }
+
+    .invitation-closing {
+        font-size: 1rem;
+    }
+}
+
 /* --- Sections --- */
 .section {
     padding: 7rem 0;
@@ -812,6 +1009,434 @@ a {
 /* Ensure preloader stays above hearts */
 .preloader {
     z-index: 9999 !important;
+}
+
+/* --- Bring With You Section --- */
+.bring-section {
+    background: var(--color-bg);
+    padding: 5rem 0;
+    overflow: hidden;
+}
+
+.bring-content {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.bring-ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+}
+
+.bring-ornament span:nth-child(1),
+.bring-ornament span:nth-child(3) {
+    width: 50px;
+    height: 1px;
+    background: var(--color-border);
+}
+
+.bring-ornament span:nth-child(2) {
+    width: 6px;
+    height: 6px;
+    background: var(--color-accent-light);
+    border-radius: 50%;
+}
+
+.bring-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 3.5vw, 2rem);
+    font-weight: 300;
+    color: var(--color-text);
+    letter-spacing: 0.03em;
+    line-height: 1.6;
+    margin-bottom: 3rem;
+}
+
+.bring-highlight {
+    color: var(--color-accent);
+    font-weight: 500;
+    letter-spacing: 0.1em;
+}
+
+.bring-gallery {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.bring-img-wrapper {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    aspect-ratio: 3 / 4;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    transition: transform 0.6s var(--transition-smooth), box-shadow 0.6s ease;
+}
+
+.bring-img-wrapper::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.bring-img-wrapper::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.15), transparent);
+    z-index: 1;
+    pointer-events: none;
+    border-radius: 0 0 12px 12px;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.bring-img-wrapper:hover::after {
+    opacity: 1;
+}
+
+.bring-img-wrapper:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+}
+
+.bring-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s var(--transition-smooth);
+}
+
+.bring-img-wrapper:hover img {
+    transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+    .bring-section {
+        padding: 4rem 0;
+    }
+
+    .bring-gallery {
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .bring-section {
+        padding: 3.5rem 0;
+    }
+
+    .bring-title {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+    }
+
+    .bring-gallery {
+        gap: 0.75rem;
+    }
+
+    .bring-img-wrapper {
+        border-radius: 8px;
+    }
+
+    .bring-img-wrapper::before {
+        border-radius: 8px;
+    }
+
+    .bring-img-wrapper::after {
+        border-radius: 0 0 8px 8px;
+    }
+}
+
+/* --- Countdown Section --- */
+.countdown-section {
+    position: relative;
+    padding: 6rem 0;
+    overflow: hidden;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+}
+
+.countdown-bg-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.countdown-bg-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.countdown-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        180deg,
+        rgba(44, 44, 44, 0.45) 0%,
+        rgba(44, 44, 44, 0.55) 50%,
+        rgba(44, 44, 44, 0.45) 100%
+    );
+}
+
+.countdown-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+}
+
+.countdown-text-card {
+    max-width: 650px;
+    margin: 0 auto;
+    padding: 3rem 2.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    /* backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px); */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+
+.countdown-message {
+    font-family: var(--font-serif);
+    font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+    font-weight: 300;
+    color: var(--color-white);
+    line-height: 1.8;
+    letter-spacing: 0.02em;
+    margin-bottom: 2.5rem;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.countdown-timer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.countdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 70px;
+}
+
+.countdown-number {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    font-weight: 300;
+    color: var(--color-white);
+    letter-spacing: 0.05em;
+    line-height: 1;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.countdown-label {
+    font-family: var(--font-serif);
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.countdown-separator {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.4);
+    line-height: 1;
+    margin-bottom: 1.2rem;
+    animation: countdownPulse 2s ease-in-out infinite;
+}
+
+@keyframes countdownPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+@media (max-width: 768px) {
+    .countdown-section {
+        padding: 5rem 0;
+        min-height: 400px;
+    }
+
+    .countdown-text-card {
+        padding: 2.5rem 1.5rem;
+    }
+
+    .countdown-timer {
+        gap: 0.6rem;
+    }
+
+    .countdown-item {
+        min-width: 55px;
+    }
+}
+
+@media (max-width: 480px) {
+    .countdown-section {
+        padding: 4rem 0;
+        min-height: 350px;
+    }
+
+    .countdown-text-card {
+        padding: 2rem 1.25rem;
+        border-radius: 14px;
+    }
+
+    .countdown-message {
+        margin-bottom: 2rem;
+    }
+
+    .countdown-timer {
+        gap: 0.4rem;
+    }
+
+    .countdown-item {
+        min-width: 48px;
+        gap: 0.35rem;
+    }
+
+    .countdown-separator {
+        margin-bottom: 1rem;
+    }
+}
+
+/* --- Dress Code Section --- */
+.dresscode-section {
+    background: var(--color-cream);
+    padding: 5rem 0;
+}
+
+.dresscode-content {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.dresscode-content .section-header {
+    margin-bottom: 2.5rem;
+}
+
+.dresscode-body {
+    text-align: center;
+}
+
+.dresscode-image-wrapper {
+    position: relative;
+    max-width: 360px;
+    margin: 0 auto 2.5rem;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    transition: transform 0.6s var(--transition-smooth), box-shadow 0.6s ease;
+}
+
+.dresscode-image-wrapper:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+}
+
+.dresscode-image-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.8s var(--transition-smooth);
+}
+
+.dresscode-image-wrapper:hover img {
+    transform: scale(1.03);
+}
+
+.dresscode-text p {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    font-weight: 300;
+    line-height: 1.9;
+    color: var(--color-text-light);
+    letter-spacing: 0.02em;
+}
+
+.dresscode-text p:first-child {
+    margin-bottom: 0.25rem;
+}
+
+@media (max-width: 768px) {
+    .dresscode-section {
+        padding: 4rem 0;
+    }
+
+    .dresscode-image-wrapper {
+        max-width: 300px;
+        margin-bottom: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .dresscode-section {
+        padding: 3.5rem 0;
+    }
+
+    .dresscode-image-wrapper {
+        max-width: 260px;
+        border-radius: 12px;
+    }
+
+    .dresscode-text p {
+        font-size: 0.95rem;
+    }
+}
+
+/* --- Bottom Image --- */
+.bottom-image {
+    display: flex;
+    justify-content: center;
+    padding: 4rem 2rem;
+    background: var(--color-bg);
+}
+
+.bottom-image img {
+    display: block;
+    max-width: 420px;
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    .bottom-image {
+        padding: 0;
+    }
+
+    .bottom-image img {
+        max-width: 100%;
+        border-radius: 0;
+        box-shadow: none;
+    }
 }
 
 /* --- Footer --- */

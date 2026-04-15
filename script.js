@@ -156,6 +156,39 @@ document.addEventListener('DOMContentLoaded', () => {
         infoObserver.observe(item);
     });
 
+    // --- Countdown Timer ---
+    const weddingDate = new Date('2026-06-10T11:30:00').getTime();
+
+    function updateCountdown() {
+        const now = new Date().getTime();
+        const diff = weddingDate - now;
+
+        if (diff <= 0) {
+            document.getElementById('cdDays').textContent = '00';
+            document.getElementById('cdHours').textContent = '00';
+            document.getElementById('cdMinutes').textContent = '00';
+            document.getElementById('cdSeconds').textContent = '00';
+            return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        const pad = (n) => String(n).padStart(2, '0');
+
+        document.getElementById('cdDays').textContent = pad(days);
+        document.getElementById('cdHours').textContent = pad(hours);
+        document.getElementById('cdMinutes').textContent = pad(minutes);
+        document.getElementById('cdSeconds').textContent = pad(seconds);
+    }
+
+    if (document.getElementById('countdownTimer')) {
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    }
+
     // --- Floating Hearts Animation (across entire page) ---
     function createFloatingHearts() {
         // Create a fixed container that covers the whole viewport
