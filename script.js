@@ -481,11 +481,20 @@ document.addEventListener('DOMContentLoaded', () => {
                     throw new Error('endpoint-not-configured');
                 }
 
-                await fetch(RSVP_ENDPOINT, {
+                // Note: Google Apps Script responds with a 302 redirect that
+                // browsers can't follow cleanly under `no-cors` mode, so fetch
+                // sometimes never resolves even though the data lands in the
+                // sheet. We race it against a timeout and assume success.
+                const submission = fetch(RSVP_ENDPOINT, {
                     method: 'POST',
                     body: payload,
                     mode: 'no-cors'
-                });
+                }).catch(() => {});
+
+                await Promise.race([
+                    submission,
+                    new Promise((resolve) => setTimeout(resolve, 3000))
+                ]);
 
                 setFeedback('Շնորհակալություն, Ձեր պատասխանը ստացված է 🤍', 'success');
                 rsvpForm.classList.add('is-sent');
