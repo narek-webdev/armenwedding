@@ -498,6 +498,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 setFeedback('Շնորհակալություն, Ձեր պատասխանը ստացված է 🤍', 'success');
                 rsvpForm.classList.add('is-sent');
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('is-loading');
             } catch (err) {
                 if (err.message === 'endpoint-not-configured') {
                     setFeedback(
