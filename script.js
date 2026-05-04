@@ -104,11 +104,24 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- Parallax-like subtle movement on hero ---
+    // --- Hero gate (first image + "Բացել" → open second image + unlock scroll) ---
     const hero = document.getElementById('hero');
     const heroContent = document.querySelector('.hero-content');
+    const openInviteBtn = document.getElementById('openInvite');
 
-    if (hero && heroContent) {
+    if (hero && hero.classList.contains('hero-gate') && openInviteBtn) {
+        // lock scroll until user opens
+        document.body.classList.add('is-hero-locked');
+
+        openInviteBtn.addEventListener('click', () => {
+            hero.classList.add('is-open');
+            document.body.classList.remove('is-hero-locked');
+
+            // Let the transition start, then ensure we remain at the top
+            window.requestAnimationFrame(() => window.scrollTo(0, 0));
+        });
+    } else if (hero && heroContent) {
+        // --- Parallax-like subtle movement on hero (legacy hero) ---
         let ticking = false;
 
         window.addEventListener('scroll', () => {
@@ -519,7 +532,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Cursor trail effect (very subtle, desktop only) ---
-    if (window.innerWidth > 768) {
+    if (window.innerWidth > 768 && hero && !hero.classList.contains('hero-gate')) {
         let mouseX = 0;
         let mouseY = 0;
         let trailTimeout;

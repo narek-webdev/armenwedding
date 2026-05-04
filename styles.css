@@ -164,6 +164,250 @@ a {
     padding: 2rem;
 }
 
+/* --- Hero gate (2 images, open on click) --- */
+.hero.hero-gate::before {
+    display: none;
+}
+
+.hero.hero-gate {
+    background: transparent;
+    height: 100vh;
+    min-height: 100vh;
+}
+
+.hero-gate-stage {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+}
+
+.hero-bg {
+    position: absolute;
+    inset: 0;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    will-change: transform, opacity, filter;
+    transform: scale(1.02);
+}
+
+.hero-bg--one {
+    background-image: url("./scroll-image.jpeg");
+    transform:
+        translate3d(0, 0, 0)
+        scale(1.06);
+    filter:
+        saturate(0.95)
+        contrast(1.05)
+        blur(0px);
+    opacity: 1;
+}
+
+.hero-bg--two {
+    background-image: url("./second-scroll.jpeg");
+    transform:
+        translate3d(0, 20px, 0)
+        scale(1.12);
+    filter:
+        saturate(0.98)
+        contrast(1.06)
+        blur(10px);
+    opacity: 0;
+    -webkit-clip-path: circle(12% at 50% 45%);
+    clip-path: circle(12% at 50% 45%);
+    transition:
+        opacity 900ms var(--transition-smooth),
+        transform 900ms var(--transition-smooth),
+        filter 900ms var(--transition-smooth),
+        clip-path 900ms var(--transition-smooth),
+        -webkit-clip-path 900ms var(--transition-smooth);
+}
+
+/* Subtle light sweep for extra “fancy” feel */
+.hero-gate-stage::after {
+    content: '';
+    position: absolute;
+    inset: -20%;
+    background: radial-gradient(
+        60% 40% at 30% 30%,
+        rgba(255, 255, 255, 0.10) 0%,
+        rgba(255, 255, 255, 0.05) 22%,
+        transparent 60%
+    );
+    opacity: 0.06;
+    transform: translate3d(0, 0, 0);
+    pointer-events: none;
+    z-index: 1;
+    mix-blend-mode: soft-light;
+    transition: opacity 900ms var(--transition-smooth), transform 900ms var(--transition-smooth);
+}
+
+.hero.hero-gate .hero-overlay {
+    background: linear-gradient(
+        180deg,
+        rgba(18, 18, 18, 0.25) 0%,
+        rgba(18, 18, 18, 0.45) 55%,
+        rgba(18, 18, 18, 0.55) 100%
+    );
+}
+
+.hero-content--gate {
+    z-index: 2;
+    width: min(980px, calc(100% - 4rem));
+    margin: 0 auto;
+    padding: 0;
+    color: rgba(255, 255, 255, 0.92);
+    text-shadow: 0 2px 18px rgba(0, 0, 0, 0.35);
+    will-change: transform, opacity;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.hero.hero-gate .hero-content {
+    display: grid;
+    place-items: center;
+    height: 100%;
+    padding: 2.25rem 2rem;
+}
+
+.hero.hero-gate .hero-names .name,
+.hero.hero-gate .hero-names .ampersand {
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.hero.hero-gate .hero-date p {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.hero.hero-gate .date-line {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.hero.hero-gate .scroll-indicator {
+    margin-top: 1.25rem;
+    color: rgba(255, 255, 255, 0.7);
+    opacity: 1;
+}
+
+.hero.hero-gate .scroll-indicator:hover {
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.hero.hero-gate .scroll-arrow {
+    animation: float 2.2s ease-in-out infinite;
+}
+
+/* Gate screens */
+.hero-content--gate {
+    text-align: center;
+}
+
+.hero-gate-screen {
+    display: grid;
+    place-items: center;
+    gap: 1.75rem;
+    text-align: center;
+}
+
+.hero-gate-screen--closed .hero-names {
+    margin-bottom: 0.25rem;
+}
+
+.hero-open-btn {
+    appearance: none;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    background: rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 0.95rem 2.1rem;
+    border-radius: 999px;
+    font-family: var(--font-serif);
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: transform 250ms ease, background-color 250ms ease, border-color 250ms ease;
+}
+
+.hero-open-btn:hover {
+    transform: translateY(-1px);
+    background: rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 255, 255, 0.65);
+}
+
+.hero-open-btn:active {
+    transform: translateY(0);
+}
+
+/* Start with only closed screen visible */
+.hero.hero-gate .hero-gate-screen--open {
+    opacity: 0;
+    transform: translateY(10px);
+    pointer-events: none;
+    transition: opacity 700ms var(--transition-smooth), transform 700ms var(--transition-smooth);
+}
+
+.hero.hero-gate .hero-gate-screen--closed {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 500ms var(--transition-smooth), transform 500ms var(--transition-smooth);
+}
+
+/* Open state */
+.hero.hero-gate.is-open .hero-bg--two {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1.06);
+    filter: saturate(0.98) contrast(1.06) blur(0px);
+    -webkit-clip-path: circle(140% at 50% 45%);
+    clip-path: circle(140% at 50% 45%);
+}
+
+.hero.hero-gate.is-open .hero-gate-stage::after {
+    opacity: 0.12;
+    transform: translate3d(36px, -26px, 0);
+}
+
+.hero.hero-gate.is-open .hero-gate-screen--closed {
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none;
+}
+
+.hero.hero-gate.is-open .hero-gate-screen--open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* Page lock (prevent scrolling until opened) */
+body.is-hero-locked {
+    overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-bg--two,
+    .hero-gate-stage::after,
+    .hero-gate-screen--open,
+    .hero-gate-screen--closed {
+        transition: none !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero.hero-gate .hero-content {
+        padding: 2rem 1.25rem;
+    }
+
+    .hero-content--gate {
+        width: min(980px, calc(100% - 2.5rem));
+    }
+}
+
 /* --- Couple Photo --- */
 .couple-photo {
     margin-bottom: 2rem;
@@ -459,22 +703,28 @@ a {
     position: relative;
     color: var(--color-text);
     font-weight: 500;
-    font-size: 1.05rem;
+    font-size: 1.15rem;
+    isolation: isolate;
 }
 
 .cal-day.cal-highlight::before {
-    content: '';
+    content: '❤';
     position: absolute;
-    width: 38px;
-    height: 38px;
-    border: 1.5px solid var(--color-accent);
-    border-radius: 50%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -55%) scale(1);
+    font-size: 2.6rem;
+    line-height: 1;
+    color: rgba(138, 125, 107, 0.85);
+    opacity: 0.35;
     animation: calPulse 3s ease-in-out infinite;
+    pointer-events: none;
+    z-index: -1;
 }
 
 @keyframes calPulse {
-    0%, 100% { transform: scale(1); opacity: 0.6; }
-    50% { transform: scale(1.1); opacity: 1; }
+    0%, 100% { transform: translate(-50%, -55%) scale(1); opacity: 0.6; }
+    50% { transform: translate(-50%, -55%) scale(1.1); opacity: 1; }
 }
 
 .invitation-closing {
@@ -497,8 +747,7 @@ a {
     }
 
     .cal-day.cal-highlight::before {
-        width: 34px;
-        height: 34px;
+        font-size: 2.3rem;
     }
 }
 
@@ -526,8 +775,7 @@ a {
     }
 
     .cal-day.cal-highlight::before {
-        width: 30px;
-        height: 30px;
+        font-size: 2.05rem;
     }
 
     .invitation-closing {
