@@ -3,6 +3,9 @@
    ============================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
+    if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+    }
 
     // --- Background Music (muted by default, no autoplay) ---
     const bgMusic = document.getElementById('bgMusic');
@@ -110,7 +113,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const openInviteBtn = document.getElementById('openInvite');
 
     if (hero && hero.classList.contains('hero-gate') && openInviteBtn) {
-        // lock scroll until user opens
+        window.scrollTo(0, 0);
+
+        // Keep the class for gate state styling, but do not block page scrolling.
         document.body.classList.add('is-hero-locked');
 
         openInviteBtn.addEventListener('click', () => {

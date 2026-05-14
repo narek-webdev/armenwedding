@@ -405,7 +405,7 @@ a {
 
 /* Page lock (prevent scrolling until opened) */
 body.is-hero-locked {
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 @media (prefers-reduced-motion: reduce) {
