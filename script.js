@@ -113,17 +113,40 @@ document.addEventListener('DOMContentLoaded', () => {
     const openInviteBtn = document.getElementById('openInvite');
 
     if (hero && hero.classList.contains('hero-gate') && openInviteBtn) {
+        const closedGate = hero.querySelector('.hero-gate-screen--closed');
+        const openGate = hero.querySelector('.hero-gate-screen--open');
+
+        const lockHeroGate = () => {
+            document.documentElement.classList.add('is-hero-locked');
+            document.body.classList.add('is-hero-locked');
+        };
+
+        const unlockHeroGate = () => {
+            document.documentElement.classList.remove('is-hero-locked');
+            document.body.classList.remove('is-hero-locked');
+        };
+
         window.scrollTo(0, 0);
 
-        // Keep the class for gate state styling, but do not block page scrolling.
-        document.body.classList.add('is-hero-locked');
+        lockHeroGate();
 
         openInviteBtn.addEventListener('click', () => {
             hero.classList.add('is-open');
-            document.body.classList.remove('is-hero-locked');
+            if (closedGate) closedGate.setAttribute('aria-hidden', 'true');
+            if (openGate) openGate.setAttribute('aria-hidden', 'false');
+            unlockHeroGate();
 
             // Let the transition start, then ensure we remain at the top
             window.requestAnimationFrame(() => window.scrollTo(0, 0));
+        });
+
+        window.addEventListener('pageshow', () => {
+            if (hero.classList.contains('is-open')) {
+                unlockHeroGate();
+            } else {
+                window.scrollTo(0, 0);
+                lockHeroGate();
+            }
         });
     } else if (hero && heroContent) {
         // --- Parallax-like subtle movement on hero (legacy hero) ---

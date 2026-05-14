@@ -403,9 +403,19 @@ a {
     pointer-events: auto;
 }
 
-/* Page lock (prevent scrolling until opened) */
+/* Mobile gate lock: first screen shows only the first image until opened. */
+html.is-hero-locked,
 body.is-hero-locked {
     overflow-x: hidden;
+}
+
+@media (max-width: 768px) {
+    html.is-hero-locked,
+    body.is-hero-locked {
+        height: 100%;
+        overflow: hidden;
+        overscroll-behavior: none;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
